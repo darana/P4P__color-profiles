@@ -9,8 +9,13 @@ Custom Color Profiles for the DJI Phantom 4 Pro created using an [XRite Color Ch
 Download [P4P-color_profiles.zip](https://github.com/darana/P4P__color-profiles/blob/master/dist/P4P-color_profiles.zip) or clone the repo
 
 ### Installation
-On Windows, copy all of the .dcp files into C:\users\%yourprofile%\AppData\Roaming\Adobe\CameraRaw\CameraProfiles
 
+#### Windows
+Unzip all of the .dcp files into C:\users\%yourprofile%\AppData\Roaming\Adobe\CameraRaw\CameraProfiles
+
+#### OSX
+¯\\_(ツ)_/¯
+#
 ## Embedded DJI Profile Nukerator
 
 ### About
