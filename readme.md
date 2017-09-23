@@ -11,7 +11,7 @@ Download [P4P-color_profiles.zip](https://github.com/darana/P4P__color-profiles/
 ### Installation
 
 #### Windows
-Unzip all of the .dcp files into C:\users\%yourprofile%\AppData\Roaming\Adobe\CameraRaw\CameraProfiles
+Unzip all of the .dcp files into C:\users\\%yourprofile%\AppData\Roaming\Adobe\CameraRaw\CameraProfiles
 
 #### OSX
 ¯\\_(ツ)_/¯
