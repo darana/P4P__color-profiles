@@ -40,7 +40,7 @@ ActiveArea
 ### OpcodeList1
 OpcodeList1
 ### OpcodeList3
-Contains Binary data. Seems to be most responsible for the cropping of the file.
+Contains Binary data. Seems to be most responsible for the cropping of the file. 
 ### DefaultUserCrop
 DefaultUserCrop
 ### YCbCrCoefficients
