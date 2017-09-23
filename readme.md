@@ -1,6 +1,6 @@
-# Phantom 4 Pro Profile Management
+# Phantom 4 Pro DNG Profile Management
 
-## DNG Color Profiles
+## Custom DNG Color Profiles
 
 ### About
 Custom Color Profiles for the DJI Phantom 4 Pro created using an [XRite Color Checker Passport](http://xritephoto.com/colorchecker-passport-photo)
