@@ -28,4 +28,4 @@ See the full thread on [PhantomPilots.com](https://phantompilots.com/threads/nuk
 Thanks in particular to Dingoz and GMack for their contributions and efforts!
 
 ### Download
-This is very much still a work in progress. You can use the batch file _dngnukerator.bat_ to aggressively strip all of the settings that could be part of the embedded profile. Testing continues to identify with certainy which EXIF tags definitely contain that the embedded profile.
+This is very much still a work in progress. You can use the batch file _dngnukerator.bat_ to aggressively strip all of the settings that could be part of the embedded profile. Testing continues to identify with certainy which EXIF tags definitely contain that the embedded profile. 
