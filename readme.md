@@ -23,9 +23,9 @@ Basic issue is that the DJI RAW files (dng format) have an embedded profile that
 
 All of the components of this embedded profile are defined within the EXIF data of the DNG file. So by changing or clearing the right EXIF tags we can effectively remove the embedded profile and start at the beginning.
 
-See the full thread on [PhantomPilots.com](https://phantompilots.com/threads/nuking-the-dng-camera-profile.120302/) for further discussion and rambling!
-
-Thanks in particular to Dingoz and GMack for their contributions and efforts!
+Thanks in particular to Dingoz and GMack on PhantomPilot.com for their contributions and testing! See the full thread on [PhantomPilots.com](https://phantompilots.com/threads/nuking-the-dng-camera-profile.120302/) for further discussion and rambling!
 
 ### Download
-This is very much still a work in progress. You can use the batch file _dngnukerator.bat_ to aggressively strip all of the settings that could be part of the embedded profile. Testing continues to identify with certainy which EXIF tags definitely contain that the embedded profile. 
+This is very much still a work in progress. You can use the batch file _dngnukerator.bat_ to aggressively strip all of the settings that could be part of the embedded profile. Testing continues to identify with certainy which EXIF tags definitely contain that the embedded profile.
+
+This batch file requires the awesome ExifTool by Phil Harvey. Current version 10.61 for windows included in nukerator folder. See [ExifTool site](https://www.sno.phy.queensu.ca/~phil/exiftool/) for OS X package or more recent versions.
