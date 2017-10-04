@@ -1,4 +1,5 @@
 # Phantom 4 Pro DNG Profile Management
+Phantom 4 Pro custom color and lens profiles plus instructions on nuking the embedded DJI profiles. [Original repo on GitHub](https://github.com/darana/P4P__color-profiles)
 
 ## Custom DNG Color Profiles
 
@@ -21,6 +22,9 @@ Lens profile & documentation by [@Dingoz](https://phantompilots.com/members/ding
 
 ### About
 Here are Lightroom/Photoshop/Camera Raw lens profiles (RAW+JPG versions). These are only for RAW files that have been stripped of the embedded lens profile (at minimum "OpCodeList3" among others as desired). It will apply lens distortion correction (almost identical to DJI's profile except retaining a larger field of view and less distortion scaling), Vignetting and Aberrations.
+
+### Download
+Download [p4p-adobe-lens-profiles.zip](https://github.com/darana/P4P__color-profiles/blob/master/p4p-adobe-lens-profiles/p4p-adobe-lens-profiles.zip) or clone the rep
 
 I created these from shooting actual test charts using the P4A camera (official Adobe lens profile tool). I might go back a redo another set of test charts just to compare any variations that might show or increase accuracy further (see if I can get data closer into the 4 corners) but they appear to be good to go as is anyway.
 
