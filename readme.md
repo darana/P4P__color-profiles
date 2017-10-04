@@ -10,11 +10,28 @@ Download [P4P-color_profiles.zip](https://github.com/darana/P4P__color-profiles/
 
 ### Installation
 
-#### Windows
+##### Windows
 Unzip all of the .dcp files into C:\users\\%yourprofile%\AppData\Roaming\Adobe\CameraRaw\CameraProfiles
 
-#### OSX
+##### OSX
 ¯\\_(ツ)_/¯
+
+## Custom Phantom 4 Pro Lens Profile
+Lens profile & documentation by [@Dingoz](https://phantompilots.com/members/dingoz.97597/) on [PhantomPilots.com](https://phantompilots.com/threads/phantom-4-pro-adv-lightroom-lens-profile.124119/#post-1266093)
+
+### About
+Here are Lightroom/Photoshop/Camera Raw lens profiles (RAW+JPG versions). These are only for RAW files that have been stripped of the embedded lens profile (at minimum "OpCodeList3" among others as desired). It will apply lens distortion correction (almost identical to DJI's profile except retaining a larger field of view and less distortion scaling), Vignetting and Aberrations.
+
+I created these from shooting actual test charts using the P4A camera (official Adobe lens profile tool). I might go back a redo another set of test charts just to compare any variations that might show or increase accuracy further (see if I can get data closer into the 4 corners) but they appear to be good to go as is anyway.
+
+### Installation
+
+##### Windows
+Unzip all of the .lcp files into C:\users\\%yourprofile%\AppData\Roaming\Adobe\CameraRaw\LensProfiles\1.0
+
+##### OSX
+¯\\_(ツ)_/¯
+
 #
 ## Embedded DJI Profile Nukerator
 
