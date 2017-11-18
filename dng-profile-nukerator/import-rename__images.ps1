@@ -52,7 +52,7 @@
         $opcode_files.add($file)
         $total_opcode_files++
       }
-      exiftool -r -m -o . -v3 -d "zTemp\%Y-%m-%d - [$camera_actual]\%Y%m%d-$camera_code--%%f.%%e" "-filename<createdate" $file | tee-object -append -file .\exiftoollog--all.txt | Out-File .\exiftoollog-_last.txt
+      exiftool -r -m -o . -v3 -d "%Y\%Y-%m-%d - [$camera_actual]\%Y%m%d-$camera_code--%%f.%%e" "-filename<createdate" $file | tee-object -append -file .\exiftoollog--all.txt | Out-File .\exiftoollog-_last.txt
 
       Write-Host "---------------------------------"
       Write-Host "Copied:             $files_counter/$total_files"
@@ -86,3 +86,4 @@
   Write-Host ""
   Write-Host ""
   Write-Host "---------------------------------"
+  Pause
