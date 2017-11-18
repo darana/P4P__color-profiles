@@ -1,0 +1,1 @@
+exiftool.exe -r -OpcodeList3= -overwrite_original -progress -v3 -ext dng -pause . | tee-object -file .\exiftoollog.txt

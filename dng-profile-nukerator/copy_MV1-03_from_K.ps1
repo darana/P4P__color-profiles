@@ -1,0 +1,2 @@
+exiftool -r -o . -v3 -d ztemp\%Y%m%d__[MV1]--%%f.%%e "-filename<createdate" -ext mp4 k:\dcim | tee-object -append -file .\exiftool_copy_log.txt
+exiftool -v3 -d %Y-%m-%d__MV1-03-- "-directory<createdate" .\zTemp | tee-object -append -file .\exiftool_copy_log.txt
