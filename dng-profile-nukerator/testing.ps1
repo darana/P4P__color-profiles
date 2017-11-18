@@ -1,79 +1,77 @@
 # Set Variables - For easy changing later
-    $memory_card                    =   "D:\#Data\!Pictures\!Photographs\Aerial\testing_card"
-    # $memory_card                    =   "k:\dcim"
-    $file_types               =   @("dng", "jpg", "jpeg")
+  # USER VARIABLES
+    $memory_card          = "D:\#Data\!Pictures\!Photographs\Aerial\testing_card"
+    # $memory_card        = "k:\dcim"
+    $file_types           = @("dng", "jpg", "jpeg")
+    $opcode_files         = New-Object System.Collections.Generic.List[System.Object]
 
-# Select the name and the extension of the first file in the directory
-# If it is a picture file, stills & videos have a different EXIF code
-# to find the type of camera. Also the videos don't have serial #s so skip that
+  # Housekeeping Variables
+    $total_files          = 0
+    $total_files_of_type  = 0
+    $total_opcode_files   = 0
+    $files_counter        = 0
+    $opcode_files_counter = 0
+    
+  # Get count of total_files of the types we're looking for so we can display progress
+  foreach ($file_type in $file_types) {
+    $total_files_of_type = Get-ChildItem "$memory_card" -recurse -file -Filter *.$file_type
+    $total_files = $total_files + $total_files_of_type.count
+  }    
 
-    foreach ($file_type in $file_types) {    
-        $files = Get-ChildItem "$memory_card" -recurse -file -Filter *.$file_type | Select -exp fullname
-        foreach ($file in $files) {
-            $camera = exiftool -model $file
-            $camera = $camera.TrimStart("Camera Model Name               : ")
-            switch ($camera)
-            {
-                FC6310  {$camera_code = "P4P"}
-                FC220   {$camera_code = "M1P"}
-                default {$camera_code = ""}
-            }
-            if ($model -eq "UniqueCameraModel") {
-                $serial = exiftool -CameraSerialNumber $file
-                $serial = $serial.TrimStart("Camera Serial Number            : ")
-                switch ($serial)
-                    {
-                        c44879200a2f1322b12d25c3b858163         {$camera_actual = "P4P-02"}
-                        bc44879200a2f1322b12d25c3b858163        {$camera_actual = "MV1-03"}
-                        default                                 {$camera_actual = ""}
-                    }
-            }
-            exiftool -r -o . -v3 -d ztemp\%Y%m%d-$camera_code--%%f.%%e "-filename<createdate" $file | tee-object -append -file .\exiftool_copy_log.txt
+# Loop through all of the file_types on the card. Grabs all of the files of each file_type
+# For reach file we're checking the camera model and serial numbers to assign codes for renaming
+# Also want the model so we can strip  -opcodes3 from Phantom 4 Pro DNG files to clear lens profile
+  foreach ($file_type in $file_types) {
+    $files = Get-ChildItem "$memory_card" -recurse -file -Filter *.$file_type | Select -exp fullname
+    foreach ($file in $files) {
+      # Progress counter
+      $files_counter++
 
-
+      $camera = exiftool -model $file
+      switch -wildcard ($camera)
+      {
+        "*FC6310" {$camera_code = "P4P"}
+        "*FC220"  {$camera_code = "M1P"}
+        default   {$camera_code = ""}
+      }
+      
+      $serial = exiftool -SerialNumber $file
+      switch -wildcard ($serial)
+        # To add/remove/change individual cameras, change the serial number on the left and corresponding name on the right
+        # Be sure to keep the * as a wildcard at start and end so it matches the exiftool output.
+        {
+          "*944c5c7ca3aa24ee43b43f2c7e129a7*" {$camera_actual = "P4P-02"}
+          "*2014031100*"                      {$camera_actual = "MV1-03"}
+          $null                               {$camera_actual = $camera_code}
+          default                             {$camera_actual = $camera_code}
         }
-    }
+      
+      if ($file_type -eq "dng" -AND $camera_code -eq "P4P") {
+        # If a DNG file from a Phantom 4 Pro camera, saving the file into an array so we can strip off the opcodes
+        # Doing this instead of stripping at the time of copy b/c it slows down the copy & so multiple cards is slower
+        $opcode_files.add($file)
+        $total_opcode_files++
+      }
+      exiftool -r -o . -v3 -d "%Y\%Y%m%d-$camera_code--%%f.%%e" "-filename<createdate" $file | tee-object -append -file .\exiftoollog--all.txt | Out-File .\exiftoollog-_last.txt
 
-
-# Select the name and the extension of the first file in the directory
-# If it is a picture file, stills & videos have a different EXIF code
-# to find the type of camera. Also the videos don't have serial #s so skip that
-
-# $first_file = Get-ChildItem | Select-Object -First 1 | Select -exp Name
-# $first_file = Get-ChildItem "$memory_card" -recurse -file | Select-Object -First 1 | Select -exp fullname
-# $first_file_extension = Get-ChildItem "$memory_card" -recurse -file| Select-Object -First 1 | Select -exp Extension
-# switch ($first_file_extension)
-#     {
-#         .dng {$model = "UniqueCameraModel"}
-#         .jpg {$model = "UniqueCameraModel"}
-#         .mp4 {$model = "Model"}
-#         .mov {$model = "Model"}
-#     }
-#     Write-Host "$model"
-# # Grab the camera model, strip the prefix, then match it to the switch table
-# # Use this to define the generic camera code
-# $camera = exiftool -$model $first_file
-# $camera = $camera.TrimStart("Unique Camera Model             : ")
-# switch ($camera)
-#     {
-#         FC6310  {$camera_code = "P4P"}
-#         FC220   {$camera_code = "M1P"}
-#         default {$camera_code = ""}
-#     }
-# # Grab the camera model, strip the prefix, then match it to the switch table
-# # Use this to define the specific camera code
-# if ($model -eq "UniqueCameraModel") {
-#     $serial = exiftool -CameraSerialNumber $first_file
-#     $serial = $serial.TrimStart("Camera Serial Number            : ")
-#     switch ($serial)
-#         {
-#             c44879200a2f1322b12d25c3b858163         {$camera_actual = "P4P-02"}
-#             bc44879200a2f1322b12d25c3b858163        {$camera_actual = "MV1-03"}
-#             default                                 {$camera_actual = ""}
-#         }
-# }
-# # TESTING output
-#     Write-Host "$camera"
-#     Write-Host "$camera_code"
-#     Write-Host "$serial"
-#     Write-Host "$camera_actual"
+      Write-Host "---------------------------------"
+      Write-Host "$files_counter of $total_files copied"
+      Write-Host "$total_opcode_files queued for profile removal"
+    }    
+  }
+  Write-Host "---------------------------------"
+  Write-Host "All Files Copied, Renamed, & Sorted"
+  Write-Host "Beginning to strip -OpCode3 from total of $total_opcode_files P4P DNG files"
+  $opcode_files.ToArray() | tee-object -append -file .\exiftoollog--all.txt | Out-File -append .\exiftoollog-_last.txt
+  foreach ($opcode_file in $opcode_files) {
+    $opcode_files_counter++
+    exiftool.exe -OpcodeList3= -overwrite_original -progress -v3 $opcode_file | tee-object -append -file .\exiftoollog--all.txt | Out-File -append .\exiftoollog-_last.txt      
+      Write-Host "---------------------------------"
+      Write-Host "Removing profile on files $opcode_files_counter of $total_opcode_files" 
+  }
+  Write-Host "---------------------------------"
+  Write-Host "$files_counter of $total_files copied"
+  Write-Host "$opcode_files_counter of $total_opcode_files P4P DNG Profiles stripped"
+  Write-Host "See exiftoollog--last.txt for detailed logs of current import"
+  Write-Host "See exiftoollog--all.txt for detailed logs of import history"
+  Write-Host "Now, go make some cool shit"
