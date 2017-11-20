@@ -11,10 +11,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.5] - 2017-11-20
 ### Added
 - Ingest functionality for image files
-- A changelog
+- Added, uh, a changelog
 
 ### Changed
 - Updated file structures, renamed top level folders to better represent what they evolved into
+- Reorganized and updated readme.md a bit to better communicate the different portions of this repo
 - Cleaned up straight nukerator scripts, now they log the output to files and just give status on the screen instead of massive, unreadable spam.
 - Added -m to Exiftool in all uses to suppress offset errors.
 - Moved older versions of script files and windows batch version into ingest-all-the-things\zLegacy
