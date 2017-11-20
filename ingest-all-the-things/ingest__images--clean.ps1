@@ -17,6 +17,8 @@
     $log_opcode_files     = ".\ingest__log--opcode-files.txt"
     Out-File $log_last
     Out-File $log_opcode_files
+    Write-Output "Import started " | Out-File -append $log_last
+    get-date | Out-File -append $log_last
 
   # Get count of total_files of the types we're looking for so we can display progress
   foreach ($file_type in $file_types) {
@@ -98,3 +100,6 @@ Write-Host "`nCopying files from $memory_card`n"
 
   Write-Host "Now, go make some cool shit `n`n"
   Write-Host "---------------------------------"
+  Write-Output "Import Finished " | Out-File -append $log_last
+  get-date | Out-File -append $log_last
+  Pause
