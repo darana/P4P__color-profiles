@@ -1,13 +1,13 @@
-# Phantom 4 Pro DNG Profile Management
-Phantom 4 Pro custom color and lens profiles plus instructions on nuking the embedded DJI profiles. [Original repo on GitHub](https://github.com/darana/P4P__color-profiles)
+# Phantom 4 Pro DNG File Management
+Phantom 4 Pro custom color & lens profiles, importer & file renamer, and optional embedded lens profile nukeration. [Original repo on GitHub](https://github.com/darana/P4P__color-profiles)
 
-## Custom DNG Color Profiles
+## P4P DNG Color Profiles
 
 ### About
-Custom Color Profiles for the DJI Phantom 4 Pro created using an [XRite Color Checker Passport](http://xritephoto.com/colorchecker-passport-photo)
+Custom Color Profiles for the DJI Phantom 4 Pro. Created using an [XRite Color Checker Passport](http://xritephoto.com/colorchecker-passport-photo)
 
 ### Download
-Download [P4P-color_profiles.zip](https://github.com/darana/P4P__color-profiles/blob/master/dist/P4P-color_profiles.zip) or clone the repo
+Download [P4P-color_profiles.zip](https://github.com/darana/P4P__color-profiles/blob/master/p4P-color-profiles/P4P-color_profiles.zip) or clone the repo
 
 ### Installation
 
@@ -17,7 +17,7 @@ Unzip all of the .dcp files into C:\users\\%yourprofile%\AppData\Roaming\Adobe\C
 ##### OSX
 ¯\\_(ツ)_/¯
 
-## Custom Phantom 4 Pro Lens Profile
+## Phantom 4 Pro Lens Profile
 Lens profile & documentation by [@Dingoz](https://phantompilots.com/members/dingoz.97597/) on [PhantomPilots.com](https://phantompilots.com/threads/phantom-4-pro-adv-lightroom-lens-profile.124119/#post-1266093)
 
 ### About
@@ -37,7 +37,16 @@ Unzip all of the .lcp files into C:\users\\%yourprofile%\AppData\Roaming\Adobe\C
 ¯\\_(ツ)_/¯
 
 #
-## Embedded DJI Profile Nukerator
+## Ingest with Embedded Lens Nukerationizer for DNG
+
+### About
+Powershell script to simplify what becomes a multi-stage ingest process when pulling files off memory cards, in particular when removing the built-in DNG Lens Profile. Typical ingest process with Lightroom would pull files off the card and start creating thumbnails, all of which gets thrown out and requires additional metadata synchronization after removing the DNG Lens Profiles.
+
+In addition, versions for video allow parallel ingesting of video and stills off the same card. Video ingest is a whole other crazy sauce for those used to stills ingest. 
+
+Both tools designed to ingest files using Exiftool to sort & rename into appropriate directories ready to be directly imported in situ with your library/editor of choice.
+
+## Profile Nukerationizer
 
 ### About
 Basic issue is that the DJI RAW files (dng format) have an embedded profile that can not be altered from within Adobe editing tools. This profile introduces some compromises that we may not always want to accept.
