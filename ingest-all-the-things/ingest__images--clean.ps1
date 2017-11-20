@@ -1,7 +1,7 @@
 # Set Variables - For easy changing later
   # USER VARIABLES
     # $memory_card          = "D:\#Data\!Pictures\!Photographs\Aerial\testing_card" # For testing
-    $memory_card        = "k:\dcim"
+    $memory_card          = "k:\dcim"
     $file_types           = @("dng", "jpg", "jpeg")
 
   # Housekeeping Variables
@@ -38,8 +38,8 @@ Write-Host "`nCopying files from $memory_card`n"
       $camera = exiftool -model $file
       switch -wildcard ($camera)
       {
-        "*FC6310" {$camera_code = "P4P"}
-        "*FC220"  {$camera_code = "M1P"}
+        "*FC6310" {$camera_code = "-P4P"}
+        "*FC220"  {$camera_code = "-M1P"}
         default   {$camera_code = ""}
       }
 
@@ -48,19 +48,21 @@ Write-Host "`nCopying files from $memory_card`n"
         # To add/remove/change individual cameras, change the serial number on the left and corresponding name on the right
         # Be sure to keep the * as a wildcard at start and end so it matches the exiftool output.
         {
-          "*944c5c7ca3aa24ee43b43f2c7e129a7*" {$camera_actual = "P4P-02"}
-          "*2014031100*"                      {$camera_actual = "MV1-03"}
+          "*944c5c7ca3aa24ee43b43f2c7e129a7*" {$camera_actual = " - [P4P-01]"}
+          "*c44879200a2f1322b12d25c3b858163*" {$camera_actual = " - [P4P-02]"}
+          "*2014031100*"                      {$camera_actual = " - [MV1-03]"}
           $null                               {$camera_actual = $camera_code}
           default                             {$camera_actual = $camera_code}
         }
 
-      if ($file_type -eq "dng" -AND $camera_code -eq "P4P") {
+      if ($file_type -eq "dng" -AND $camera_code -eq "-P4P") {
         # If a DNG file from a Phantom 4 Pro camera, saving the file into an array so we can strip off the opcodes
         # Doing this instead of stripping at the time of copy b/c it slows down the copy & so multiple cards is slower
         # $opcode_files.add($file)
         $total_opcode_files++
       }
-      exiftool -r -m -o . -v3 -d "zTemp\%Y-%m-%d - [$camera_actual]\%Y%m%d-$camera_code--%%f.%%e" "-filename<createdate" $file | tee-object -append -file $log_all | Out-File -append $log_last
+
+      exiftool -r -m -o . -v3 -d "%Y\%Y-%m-%d$camera_actual\%Y%m%d$camera_code--%%f.%%e" "-filename<createdate" $file | tee-object -append -file $log_all | Out-File -append $log_last
 
       Write-Host "---------------------------------`n"
       Write-Host "Copied:             $files_counter/$total_files"
@@ -82,7 +84,7 @@ Write-Host "`nCopying files from $memory_card`n"
   foreach ($opcode_file in $opcode_files) {
     if ($opcode_file -like "*DNG*" -AND $opcode_file -like "*P4P*") {
       $opcode_files_counter++
-      exiftool.exe -OpcodeList3= -m -overwrite_original -progress -v3 $opcode_file | tee-object -append -file $log_all | Out-File -append $log_last
+      exiftool -OpcodeList3= -m -overwrite_original -progress -v3 $opcode_file | tee-object -append -file $log_all | Out-File -append $log_last
       Write-Host "-Opcode3 Removed:   $opcode_files_counter/$total_opcode_files    $opcode_file"
       $opcode_file | Out-File -Append $log_opcode_files
     }
