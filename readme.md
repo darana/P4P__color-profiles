@@ -61,6 +61,7 @@ There's plenty still hard coded here, basically to my preferences. Variables to 
 
 ###### Windows
 - Grab the powershell scripts
+- [All scripts require ExifTool ](https://www.sno.phy.queensu.ca/~phil/exiftool/) for binaries.
 - Put them somewhere
 - Ideally put them somewhere in your path, put that somewhere in your path, or just put it where you're going to run it.
 - You'll probably need to change your execution policy. Although probably not, if you're actually grabbing powershell scripts from GitHub
@@ -82,7 +83,7 @@ Thanks in particular to Dingoz and GMack on PhantomPilot.com for their contribut
 #### Download
 This is very much still a work in progress. You can use the batch file _dngnukerator.bat_ to aggressively strip all of the settings that could be part of the embedded profile. Testing continues to identify with certainy which EXIF tags definitely contain that the embedded profile.
 
-This batch file requires the awesome ExifTool by Phil Harvey. Current version 10.61 for windows included in nukerator folder. See [ExifTool site](https://www.sno.phy.queensu.ca/~phil/exiftool/) for OS X package or more recent versions.
+[All scripts require ExifTool ](https://www.sno.phy.queensu.ca/~phil/exiftool/) for binaries.
 
 ## P4P DNG Profile EXIF documentation
 
