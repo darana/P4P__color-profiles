@@ -34,16 +34,17 @@ Write-Host "`nCopying files from $memory_card`n"
   foreach ($file_type in $file_types) {
     $files = Get-ChildItem "$memory_card" -recurse -file -Filter *.$file_type | Select -exp fullname
     foreach ($file in $files) {
-      # Progress counter
       $files_counter++
 
       $camera = exiftool -model $file
       switch -wildcard ($camera)
-      {
-        "*FC6310" {$camera_code = "-P4P"}
-        "*FC220"  {$camera_code = "-M1P"}
-        default   {$camera_code = ""}
-      }
+        {
+          "*FC6310" {$camera_code = "P4P"}
+          "*FC220"  {$camera_code = "M1P"}
+          default   {$camera_code = ""}
+        }
+      $camera_code_folder       = " - [$camera_code]"
+      $camera_code_file         = "-[$camera_code]
 
       $serial = exiftool -SerialNumber $file
       switch -wildcard ($serial)
@@ -57,14 +58,14 @@ Write-Host "`nCopying files from $memory_card`n"
           default                             {$camera_actual = $camera_code}
         }
 
-      if ($file_type -eq "dng" -AND $camera_code -eq "-P4P") {
+      if ($file_type -eq "dng" -AND $camera_code -eq "P4P") {
         # If a DNG file from a Phantom 4 Pro camera, saving the file into an array so we can strip off the opcodes
         # Doing this instead of stripping at the time of copy b/c it slows down the copy & so multiple cards is slower
         # $opcode_files.add($file)
         $total_opcode_files++
       }
 
-      exiftool -r -m -o . -v3 -d "%Y\%Y-%m-%d$camera_actual\%Y%m%d$camera_code--%%f.%%e" "-filename<createdate" $file | tee-object -append -file $log_all | Out-File -append $log_last
+      exiftool -r -m -o . -v3 -d "%Y\%Y-%m-%d$camera_code_folder\%Y%m%d$camera_code_file--%%f.%%e" "-filename<createdate" $file | tee-object -append -file $log_all | Out-File -append $log_last
 
       Write-Host "---------------------------------`n"
       Write-Host "Copied:             $files_counter/$total_files"
