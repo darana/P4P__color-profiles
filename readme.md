@@ -6,7 +6,7 @@ DJI Phantom 4 Pro (& others) color & lens profiles, importer & file renamer, and
 - [Profile Nukerationizers](#profile-nuke)
 - [P4P DNG Profile EXIF documentation](#exif-info)
 
-## P4P DNG Color Profiles[](#){name=color-profiles}
+## P4P DNG Color Profiles[](#name=color-profiles)
 
 #### About
 Custom Color Profiles for the DJI Phantom 4 Pro. Created using an [XRite Color Checker Passport](http://xritephoto.com/colorchecker-passport-photo)
