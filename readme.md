@@ -6,7 +6,7 @@ DJI Phantom 4 Pro (& others) color & lens profiles, importer & file renamer, and
 - [Profile Nukerationizers](#profile-nuke)
 - [P4P DNG Profile EXIF documentation](#exif-info)
 
-## P4P DNG Color Profiles[]](#color-profiles)
+## P4P DNG Color Profiles[](#color-profiles)
 
 #### About
 Custom Color Profiles for the DJI Phantom 4 Pro. Created using an [XRite Color Checker Passport](http://xritephoto.com/colorchecker-passport-photo)
@@ -41,7 +41,7 @@ I created these from shooting actual test charts using the P4A camera (official 
 ###### OSX
 - ¯\\_(ツ)_/¯
 
-## Ingest with Embedded Lens Nukerationizer for DNG[](#){name=ingest}
+## Ingest with Embedded Lens Nukerationizer for DNG[](#ingest)
 
 #### About
 Powershell script to simplify what becomes a multi-stage ingest process when pulling files off memory cards, in particular when removing the built-in DNG Lens Profile. Typical ingest process with Lightroom would pull files off the card and start creating thumbnails, all of which gets thrown out and requires additional metadata synchronization after removing the DNG Lens Profiles.
