@@ -1,12 +1,12 @@
 # Phantom 4 Pro DNG File Management
 DJI Phantom 4 Pro (& others) color & lens profiles, importer & file renamer, and optional embedded lens profile nukeration. [Original repo on GitHub](https://github.com/darana/P4P__color-profiles)
 
-- [P4P DNG Color Profiles](#color-profiles)
-- [Ingest with Embedded Lens Nukerationizer for DNG](#ingest)
-- [Profile Nukerationizers](#profile-nuke)
-- [P4P DNG Profile EXIF documentation](#exif-info)
+- [P4P DNG Color Profiles](##p4p-dng-color-profiles)
+- [Ingest with Embedded Lens Nukerationizer for DNG](#ingest-with-embedded-lens-nukerationizer-for-dng)
+- [Profile Nukerationizers](#profile-nukerationizernameprofile-nuke)
+- [P4P DNG Profile EXIF documentation](#p4p-dng-profile-exif-documentationnameexif-info)
 
-## P4P DNG Color Profiles[](#color-profiles)
+## P4P DNG Color Profiles
 
 #### About
 Custom Color Profiles for the DJI Phantom 4 Pro. Created using an [XRite Color Checker Passport](http://xritephoto.com/colorchecker-passport-photo)
@@ -41,7 +41,7 @@ I created these from shooting actual test charts using the P4A camera (official 
 ###### OSX
 - ¯\\_(ツ)_/¯
 
-## Ingest with Embedded Lens Nukerationizer for DNG[](#ingest)
+## Ingest with Embedded Lens Nukerationizer for DNG
 
 #### About
 Powershell script to simplify what becomes a multi-stage ingest process when pulling files off memory cards, in particular when removing the built-in DNG Lens Profile. Typical ingest process with Lightroom would pull files off the card and start creating thumbnails, all of which gets thrown out and requires additional metadata synchronization after removing the DNG Lens Profiles.
@@ -70,7 +70,7 @@ There's plenty still hard coded here, basically to my preferences. Variables to 
 ###### OSX
 - Uh, it's written in Powershell, sooooo ¯\\_(ツ)_/¯
 
-## Profile Nukerationizer[](#){name=profile-nuke}
+## Profile Nukerationizer
 
 #### About
 Basic issue is that the DJI RAW files (dng format) have an embedded profile that can not be altered from within Adobe editing tools. This profile introduces some compromises that we may not always want to accept.
@@ -84,7 +84,7 @@ This is very much still a work in progress. You can use the batch file _dngnuker
 
 This batch file requires the awesome ExifTool by Phil Harvey. Current version 10.61 for windows included in nukerator folder. See [ExifTool site](https://www.sno.phy.queensu.ca/~phil/exiftool/) for OS X package or more recent versions.
 
-## P4P DNG Profile EXIF documentation[](#){name=exif-info}
+## P4P DNG Profile EXIF documentation
 
 ### About
 Details about the EXIF tags that contain all of the DJI _embedded profile_ that performs destructive changes to the DNG files when edited with Adobe tools.
