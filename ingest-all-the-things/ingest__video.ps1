@@ -73,34 +73,18 @@
     }
   }
   Write-Host "---------------------------------`n"
+
   Write-Host "All Files Copied, Renamed, and Sorted`n"
+
   Write-Host "!!! You can safely remove the memory card !!!`n"
+
   Write-Host "---------------------------------`n"
-  # Write-Host "Beginning to strip -OpCode3 from total of $total_opcode_files P4P DNG files`n"
 
-  # Do a regex search on the $log_last file which has, up until now, recorded all of the files
-  # copied along with their new paths. Regex does a lookbehind to find "--> '" which precedes
-  # the new path/filename. Definitely a little (lot) brute force right now but works.
-  # $opcode_files = select-string -Path $log_last -Pattern $opcode_files_regex -AllMatches | % { $_.Matches } | % { $_.Value }
-  # $opcode_files = $opcode_files.split("\n")
-
-  # foreach ($opcode_file in $opcode_files) {
-  #   if ($opcode_file -like "*DNG*" -AND $opcode_file -like "*P4P*") {
-  #     $opcode_files_counter++
-  #     exiftool -OpcodeList3= -m -overwrite_original -progress -v3 $opcode_file | tee-object -append -file $log_all | Out-File -append $log_last
-  #     Write-Host "-Opcode3 Removed:   $opcode_files_counter/$total_opcode_files    $opcode_file"
-  #     $opcode_file | Out-File -Append $log_opcode_files
-  #   }
-  # }
-  Write-Host "`n---------------------------------`n`n"
   Write-Host "Files Copied:           $files_counter/$total_files"
-  # Write-Host "P4P DNG files updated:  $opcode_files_counter/$total_opcode_files`n"
   Write-Host "Current Import log:     $log_last"
   Write-Host "All Imorts log:         $log_all"
-  # Write-Host "Updated P4P  DNG files: $log_opcode_files`n"
+  Write-Host "Now, go make some cool shit `n"
 
-  Write-Host "Now, go make some cool shit `n`n"
   Write-Host "---------------------------------"
-  Write-Output "Import Finished " | Out-File -append $log_last
   get-date | Out-File -append $log_last
   Pause
