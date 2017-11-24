@@ -2,7 +2,7 @@
   # USER VARIABLES
     # $memory_card          = "D:\#Data\!Pictures\!Photographs\Aerial\testing_card" # For testing
     $memory_card          = "k:\dcim"
-    $file_types           = @("dng", "jpg", "jpeg")
+    $file_types           = @("mp4", "mov")
 
   # Housekeeping Variables
     # $opcode_files         = New-Object System.Collections.Generic.List[System.Object]
@@ -35,8 +35,7 @@
     $files = Get-ChildItem "$memory_card" -recurse -file -Filter *.$file_type | Select -exp fullname
     foreach ($file in $files) {
       $files_counter++
-      Write-Progress -Id 1 -Activity "Ingesting $memory_card" -Status "Copying             : $files_counter/$total_files" -PercentComplete ($files_counter/$total_files) -CurrentOperation "Current file: $file"
-      Write-Progress -Id 2 -Activity "Nuke Queue"             -Status "Opcode3 Nuke Queue  : $opcode_files_counter" -PercentComplete -1
+      Write-Progress -Id 1 -Activity "Ingesting $memory_card" -Status "Copying: $files_counter/$total_files" -PercentComplete ($files_counter/$total_files) -CurrentOperation "Current file: $file"
 
       $camera = exiftool -model $file
       switch -wildcard ($camera)
@@ -45,8 +44,6 @@
           "*FC220"  {$camera_code = "M1P"}
           default   {$camera_code = ""}
         }
-      $camera_code_folder       = " - [$camera_code]"
-      $camera_code_file         = "-[$camera_code]"
 
       $serial = exiftool -SerialNumber $file
       switch -wildcard ($serial)
@@ -60,46 +57,47 @@
           default                             {$camera_actual = $camera_code}
         }
 
-      if ($file_type -eq "dng" -AND $camera_code -eq "P4P") {
-        # If a DNG file from a Phantom 4 Pro camera, saving the file into an array so we can strip off the opcodes
-        # Doing this instead of stripping at the time of copy b/c it slows down the copy & so multiple cards is slower
-        # $opcode_files.add($file)
-        $total_opcode_files++
-      }
+      $camera_code_folder       = "__[$camera_code]--"
+      $camera_code_file         = "__[$camera_code]--"
 
-      exiftool -r -m -o . -v3 -d "%Y\%Y-%m-%d$camera_code_folder\%Y%m%d$camera_code_file--%%f.%%e" "-filename<createdate" $file | tee-object -append -file $log_all | Out-File -append $log_last
+      # if ($file_type -eq "dng" -AND $camera_code -eq "P4P") {
+      #   # If a DNG file from a Phantom 4 Pro camera, saving the file into an array so we can strip off the opcodes
+      #   # Doing this instead of stripping at the time of copy b/c it slows down the copy & so multiple cards is slower
+      #   # $opcode_files.add($file)
+      #   $total_opcode_files++
+      # }
 
-      Write-Host "---------------------------------`n"
-      Write-Host "Copied:             $files_counter/$total_files"
-      Write-Host "Profile Nuke Queue: $total_opcode_files`n"
+      exiftool -r -m -o . -v3 -d "Media\%Y-%m-%d$camera_code_folder\%Y%m%d-%H%M$camera_code_file%%f.%%e" "-filename<createdate" $file | tee-object -append -file $log_all | Out-File -append $log_last
+
+
     }
   }
   Write-Host "---------------------------------`n"
   Write-Host "All Files Copied, Renamed, and Sorted`n"
   Write-Host "!!! You can safely remove the memory card !!!`n"
   Write-Host "---------------------------------`n"
-  Write-Host "Beginning to strip -OpCode3 from total of $total_opcode_files P4P DNG files`n"
+  # Write-Host "Beginning to strip -OpCode3 from total of $total_opcode_files P4P DNG files`n"
 
   # Do a regex search on the $log_last file which has, up until now, recorded all of the files
   # copied along with their new paths. Regex does a lookbehind to find "--> '" which precedes
   # the new path/filename. Definitely a little (lot) brute force right now but works.
-  $opcode_files = select-string -Path $log_last -Pattern $opcode_files_regex -AllMatches | % { $_.Matches } | % { $_.Value }
-  $opcode_files = $opcode_files.split("\n")
+  # $opcode_files = select-string -Path $log_last -Pattern $opcode_files_regex -AllMatches | % { $_.Matches } | % { $_.Value }
+  # $opcode_files = $opcode_files.split("\n")
 
-  foreach ($opcode_file in $opcode_files) {
-    if ($opcode_file -like "*DNG*" -AND $opcode_file -like "*P4P*") {
-      $opcode_files_counter++
-      exiftool -OpcodeList3= -m -overwrite_original -progress -v3 $opcode_file | tee-object -append -file $log_all | Out-File -append $log_last
-      Write-Host "-Opcode3 Removed:   $opcode_files_counter/$total_opcode_files    $opcode_file"
-      $opcode_file | Out-File -Append $log_opcode_files
-    }
-  }
+  # foreach ($opcode_file in $opcode_files) {
+  #   if ($opcode_file -like "*DNG*" -AND $opcode_file -like "*P4P*") {
+  #     $opcode_files_counter++
+  #     exiftool -OpcodeList3= -m -overwrite_original -progress -v3 $opcode_file | tee-object -append -file $log_all | Out-File -append $log_last
+  #     Write-Host "-Opcode3 Removed:   $opcode_files_counter/$total_opcode_files    $opcode_file"
+  #     $opcode_file | Out-File -Append $log_opcode_files
+  #   }
+  # }
   Write-Host "`n---------------------------------`n`n"
   Write-Host "Files Copied:           $files_counter/$total_files"
-  Write-Host "P4P DNG files updated:  $opcode_files_counter/$total_opcode_files`n"
+  # Write-Host "P4P DNG files updated:  $opcode_files_counter/$total_opcode_files`n"
   Write-Host "Current Import log:     $log_last"
   Write-Host "All Imorts log:         $log_all"
-  Write-Host "Updated P4P  DNG files: $log_opcode_files`n"
+  # Write-Host "Updated P4P  DNG files: $log_opcode_files`n"
 
   Write-Host "Now, go make some cool shit `n`n"
   Write-Host "---------------------------------"
