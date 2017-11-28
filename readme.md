@@ -12,7 +12,7 @@ DJI Phantom 4 Pro (& others) color & lens profiles, importer & file renamer, and
 Custom Color Profiles for the DJI Phantom 4 Pro. Created using an [XRite Color Checker Passport](http://xritephoto.com/colorchecker-passport-photo)
 
 #### Download
-Download [P4P-color_profiles.zip](https://github.com/darana/P4P__color-profiles/blob/master/p4P-color-profiles/P4P-color_profiles.zip) or clone the repo
+Download [P4P-color_profiles.zip](https://github.com/darana/P4P__color-profiles/blob/master/p4p-color-profiles/P4P-color_profiles.zip) or clone the repo
 
 #### Installation
 
