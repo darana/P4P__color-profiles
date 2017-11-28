@@ -50,9 +50,9 @@
         # To add/remove/change individual cameras, change the serial number on the left and corresponding name on the right
         # Be sure to keep the * as a wildcard at start and end so it matches the exiftool output.
         {
-          "*944c5c7ca3aa24ee43b43f2c7e129a7*" {$camera_actual = " - [P4P-01]"}
-          "*c44879200a2f1322b12d25c3b858163*" {$camera_actual = " - [P4P-02]"}
-          "*2014031100*"                      {$camera_actual = " - [MV1-03]"}
+          "*944c5c7ca3aa24ee43b43f2c7e129a7*" {$camera_actual = " - P4P-01"}
+          "*c44879200a2f1322b12d25c3b858163*" {$camera_actual = " - P4P-02"}
+          "*2014031100*"                      {$camera_actual = " - MV1-03"}
           $null                               {$camera_actual = $camera_code}
           default                             {$camera_actual = $camera_code}
         }

@@ -35,8 +35,8 @@
     $files = Get-ChildItem "$memory_card" -recurse -file -Filter *.$file_type | Select -exp fullname
     foreach ($file in $files) {
       $files_counter++
-      Write-Progress -Id 1 -Activity "Ingesting $memory_card" -Status "Copying             : $files_counter/$total_files" -PercentComplete ($files_counter/$total_files) -CurrentOperation "Current file: $file"
-      Write-Progress -Id 2 -Activity ""                       -Status "Opcode3 Nuke Queue  : $opcode_files_counter" -PercentComplete -1 -CurrentOperation "Current file: $opcode_file"
+      Write-Progress -Id 1 -Activity "Ingesting $memory_card" -Status "Copying: $files_counter/$total_files" -PercentComplete ($files_counter/$total_files) -CurrentOperation "Current file: $file"
+      Write-Progress -Id 2 -Activity "Nuking P4P OpcodeList3" -Status "OpcodeList3 Nuking: $opcode_files_counter/" -PercentComplete -1 -CurrentOperation "Current file: $opcode_file"
 
       $camera = exiftool -model $file
       switch -wildcard ($camera)
@@ -45,17 +45,17 @@
           "*FC220"  {$camera_code = "M1P"}
           default   {$camera_code = ""}
         }
-      $camera_code_folder       = " - [$camera_code]"
-      $camera_code_file         = "-[$camera_code]"
+      $camera_code_folder       = " - $camera_code"
+      $camera_code_file         = "-$camera_code"
 
       $serial = exiftool -SerialNumber $file
       switch -wildcard ($serial)
         # To add/remove/change individual cameras, change the serial number on the left and corresponding name on the right
         # Be sure to keep the * as a wildcard at start and end so it matches the exiftool output.
         {
-          "*944c5c7ca3aa24ee43b43f2c7e129a7*" {$camera_actual = " - [P4P-01]"}
-          "*c44879200a2f1322b12d25c3b858163*" {$camera_actual = " - [P4P-02]"}
-          "*2014031100*"                      {$camera_actual = " - [MV1-03]"}
+          "*944c5c7ca3aa24ee43b43f2c7e129a7*" {$camera_actual = " - P4P-01"}
+          "*c44879200a2f1322b12d25c3b858163*" {$camera_actual = " - P4P-02"}
+          "*2014031100*"                      {$camera_actual = " - MV1-03"}
           $null                               {$camera_actual = $camera_code}
           default                             {$camera_actual = $camera_code}
         }
