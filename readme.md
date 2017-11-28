@@ -90,6 +90,22 @@ All of the components of this embedded profile are defined within the EXIF data 
 
 Thanks in particular to Dingoz and GMack on PhantomPilot.com for their contributions and testing! See the full thread on [PhantomPilots.com](https://phantompilots.com/threads/nuking-the-dng-camera-profile.120302/) for further discussion and rambling!
 
+#### The Command
+Want to just run it yourself? Grab [Exiftool](https://www.sno.phy.queensu.ca/~phil/exiftool/) and run the command:
+
+`exiftool.exe -OpcodeList3= -m -overwrite_original -progress -v3 -ext DNG -if "$EXIF:OpcodeList3 ne ''" FILENAME\PATH`
+
+Syntax:
+- Runs `Exiftool` program and `-OpcodeList3=` sets that field to null, i.e. deleting it.
+- `-m` suppresses low priority warnings. There is a message about offset that will come up for every single file, otherwise.
+- `overwrite original` well, overwrites your original
+- `-ext DNG` tells the command only to run against DNG files, whether you specify a filename or a folder/path
+- `-progress` and `-v3` provide detailed progress and logging
+- `-if "$EXIF:OpcodeList3 ne ''"` makes the command conditional, running against the file only if the file's -OpcodeList3 isn't already blank. This is optional, I just use it to speed things up in the case where I have already run against part of the list.
+- `FILENAME\PATH` is the filename or the folder of files to execute against.
+
+
+
 #### Download
 This is very much still a work in progress. You can use the batch file _dngnukerator.bat_ to aggressively strip all of the settings that could be part of the embedded profile. Testing continues to identify with certainy which EXIF tags definitely contain that the embedded profile.
 
