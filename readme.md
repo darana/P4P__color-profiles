@@ -20,7 +20,12 @@ Download [P4P-color_profiles.zip](https://github.com/darana/P4P__color-profiles/
 - Unzip all of the .dcp files into C:\users\\%yourprofile%\AppData\Roaming\Adobe\CameraRaw\CameraProfiles
 
 ###### OSX
-- ¯\\_(ツ)_/¯
+- ¯\\_(ツ)_/¯ No More thanks to [@Ravedog](https://phantompilots.com/members/ravedog.88118/) at PhantomPilots.com
+- (users Library folder)
+- ~/Library/Application Support/Adobe/Camera Raw/CameraProfiles/
+- There is another repository for the profiles at the root Library folder on a startup drive:
+- /Library/Application Support/Adobe/Camera Raw/CameraProfiles/
+
 
 ## Phantom 4 Pro Lens Profile
 Lens profile & documentation by [@Dingoz](https://phantompilots.com/members/dingoz.97597/) on [PhantomPilots.com](https://phantompilots.com/threads/phantom-4-pro-adv-lightroom-lens-profile.124119/#post-1266093)
@@ -39,7 +44,12 @@ I created these from shooting actual test charts using the P4A camera (official 
 - Unzip all of the .lcp files into C:\users\\%yourprofile%\AppData\Roaming\Adobe\CameraRaw\LensProfiles\1.0
 
 ###### OSX
-- ¯\\_(ツ)_/¯
+- ¯\\_(ツ)_/¯ No More thanks to [@Ravedog](https://phantompilots.com/members/ravedog.88118/) at PhantomPilots.com
+- (users Library folder)
+- ~/Library/Application Support/Adobe/Camera Raw/LensProfiles/1.0/DJI/
+- There is another repository for the profiles at the root Library folder on a startup drive:
+- /Library/Application Support/Adobe/Camera Raw/LensProfiles/1.0/DJI/
+
 
 ## Ingest with Embedded Lens Nukerationizer for DNG
 

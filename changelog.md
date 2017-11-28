@@ -8,6 +8,24 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Video file ingest with rename & sort and stuff
 - Update Exiftool commands to use native Exiftool conditionals, possibly with ARG files, to allow Exiftool to run in parallel
 
+## [0.61] - 2017-11-28
+### Added
+
+### Changed
+- Tweaked ingest folder naming structure to remove []
+- OSX paths are ¯\\_(ツ)_/¯ No More thanks to [@Ravedog](https://phantompilots.com/members/ravedog.88118/) at PhantomPilots.com
+
+### Removed
+- n/a
+
+## [0.6] - 2017-11-25
+### Added
+- Video file ingest with rename & sort and stuff
+
+### Changed
+
+### Removed
+
 ## [0.5] - 2017-11-20
 ### Added
 - Ingest functionality for image files
