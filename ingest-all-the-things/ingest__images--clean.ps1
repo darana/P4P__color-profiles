@@ -2,7 +2,7 @@
   # USER VARIABLES
     # $memory_card          = "D:\#Data\!Pictures\!Photographs\Aerial\testing_card" # For testing
     $memory_card          = "k:\dcim"
-    $file_types           = @("dng", "jpg", "jpeg")
+    $file_types           = @("dng", "jpg", "jpeg", "insp")
 
   # Housekeeping Variables
     # $opcode_files         = New-Object System.Collections.Generic.List[System.Object]
